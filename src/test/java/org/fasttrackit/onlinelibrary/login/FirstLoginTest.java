@@ -1,9 +1,10 @@
 package org.fasttrackit.onlinelibrary.login;
 
-import org.apache.xpath.SourceTree;
 import org.fasttrackit.util.TestBase;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class FirstLoginTest extends TestBase {
@@ -18,10 +19,17 @@ public class FirstLoginTest extends TestBase {
         emailField.sendKeys("eu@fast.com");
 
         WebElement passField = driver.findElement(By.id("password"));
-        passField.sendKeys("eu.pass");
+        passField.sendKeys("eu.passx");
 
         WebElement loginBtn = driver.findElement(By.className("btn"));
         loginBtn.click();
+
+        try {
+            WebElement logoutBtn = driver.findElement(By.linkText("Logout"));
+            logoutBtn.click();
+        } catch (NoSuchElementException exception) {
+            Assert.fail("Logout button not found.");
+        }
     }
 
 
