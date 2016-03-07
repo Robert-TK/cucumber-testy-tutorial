@@ -19,7 +19,7 @@ public class FirstLoginTest extends TestBase {
         emailField.sendKeys("eu@fast.com");
 
         WebElement passField = driver.findElement(By.id("password"));
-        passField.sendKeys("eu.passx");
+        passField.sendKeys("eu.pass");
 
         WebElement loginBtn = driver.findElement(By.className("btn"));
         loginBtn.click();
@@ -31,6 +31,23 @@ public class FirstLoginTest extends TestBase {
             Assert.fail("Logout button not found.");
         }
     }
+
+    @Test
+    public void errorWhenInvalidPassword() {
+        System.out.println("Open Login Page.");
+        driver.get("https://rawgit.com/sdl/Testy/master/src/test/functional/app-demo/login.html");
+        //driver.findElement(By.id("email")).sendKeys("eu@fast.com");
+        WebElement emailField = driver.findElement(By.id("email"));
+        emailField.sendKeys("eu@fast.com");
+
+        WebElement passField = driver.findElement(By.id("password"));
+        passField.sendKeys("eu.passwrong");
+
+        WebElement loginBtn = driver.findElement(By.className("btn"));
+        loginBtn.click();
+
+    }
+
 
 
 }
