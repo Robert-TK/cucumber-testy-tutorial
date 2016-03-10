@@ -31,9 +31,7 @@ public class FirstLoginTest extends TestBase {
         openLoginPage();
         doLogin("eu.fast.com", "wrong.pass");
 
-        WebElement errorMsg = driver.findElement(By.className("error-msg"));
-        System.out.println(errorMsg.getText());
-        assertThat(errorMsg.getText(), is("Invalid user or password!"));
+        assertThatErrorIs("Invalid user or password!");
     }
 
     @Test
@@ -41,9 +39,22 @@ public class FirstLoginTest extends TestBase {
         openLoginPage();
         doLogin("eu.fast.com", "");
 
+        assertThatErrorIs("Please enter your password!");
+
+    }
+
+    @Test
+    public void whenEnterOnlyPasswordGetErrorMessage() {
+        openLoginPage();
+        doLogin("eu.fast.com", "wrong.pass");
+
+        assertThatErrorIs("Please enter your email!");
+    }
+
+    private void assertThatErrorIs(String message) {
         WebElement errorMsg = driver.findElement(By.className("error-msg"));
         System.out.println(errorMsg.getText());
-        assertThat(errorMsg.getText(), is("Please enter your password!"));
+        assertThat(errorMsg.getText(), is(message));
     }
 
 
