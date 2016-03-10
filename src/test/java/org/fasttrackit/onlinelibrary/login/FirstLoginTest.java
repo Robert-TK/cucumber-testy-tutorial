@@ -48,7 +48,15 @@ public class FirstLoginTest extends TestBase {
         openLoginPage();
         doLogin("", "eu.pass");
 
-        assertThatErrorIs("Invalid user or password!");
+        assertThatErrorIs("Please enter your email!");
+    }
+
+    @Test
+    public void noCredentials() {
+        openLoginPage();
+        doLogin("", "");
+
+        assertThatErrorIs("Please enter your email!");
     }
 
     private void assertThatErrorIs(String message) {
