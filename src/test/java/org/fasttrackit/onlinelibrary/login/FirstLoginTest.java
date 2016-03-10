@@ -37,7 +37,7 @@ public class FirstLoginTest extends TestBase {
     @Test
     public void whenEnterOnlyEmailIGetErrorMessage() {
         openLoginPage();
-        doLogin("eu.fast.com", "");
+        doLogin("eu.fast.com","");
 
         assertThatErrorIs("Please enter your password!");
 
@@ -46,9 +46,9 @@ public class FirstLoginTest extends TestBase {
     @Test
     public void whenEnterOnlyPasswordGetErrorMessage() {
         openLoginPage();
-        doLogin("eu.fast.com", "wrong.pass");
+        doLogin("", "eu.pass");
 
-        assertThatErrorIs("Please enter your email!");
+        assertThatErrorIs("Invalid user or password!");
     }
 
     private void assertThatErrorIs(String message) {
