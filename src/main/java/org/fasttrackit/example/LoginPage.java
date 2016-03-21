@@ -8,13 +8,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 public class LoginPage {
-    @FindBy(how = How.ID, using="email")
+    @FindBy(how = How.ID, using = "email")
     private WebElement emailField;
 
     @FindBy(how = How.CLASS_NAME, using = "error-msg")
     private WebElement errorMsg;
 
-    @FindBy(how = How.NAME, using="password")
+    @FindBy(how = How.NAME, using = "password")
     private WebElement passField;
 
     @FindBy(how = How.CLASS_NAME, using = "login-btn")

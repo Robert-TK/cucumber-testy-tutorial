@@ -1,7 +1,8 @@
 package org.fasttrackit.onlinelibrary.login;
 
-import com.sdl.selenium.web.utils.Utils;
+import org.fasttrackit.example.ChangePasswordPage;
 import org.fasttrackit.example.LoginPage;
+import org.fasttrackit.example.NavbarPage;
 import org.fasttrackit.util.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,9 +17,14 @@ import static org.hamcrest.core.Is.is;
 public class FirstLoginTest extends TestBase {
 
     private LoginPage loginPage;
+    private ChangePasswordPage changePasswordPage;
+    private NavbarPage navbar;
 
     public FirstLoginTest() {
+
         loginPage = PageFactory.initElements(driver, LoginPage.class);
+        changePasswordPage = PageFactory.initElements(driver, ChangePasswordPage.class);
+        navbar = PageFactory.initElements(driver, NavbarPage.class);
     }
 
 
@@ -64,34 +70,15 @@ public class FirstLoginTest extends TestBase {
         loginPage.assertThatErrorIs("Please enter your email!");
     }
 
-
-
     @Test
     public void successChangePassword() {
         openLoginPage();
         loginPage.doLogin("eu@fast.com", "eu.pass");
-        WebElement preferencesButton = driver.findElement(By.xpath("//nav//button"));
-        preferencesButton.click();
-
-        Utils.sleep(300);
-
-        //css selector: $$("#preferences-win input[name=password]")
-
-        WebElement currentPassField = driver.findElement(By.xpath("//div[@id='preferences-win']//input[@name='password']"));
-        currentPassField.sendKeys("eu.pass");
-
-        WebElement newPassField = driver.findElement(By.xpath("//input[@name='newPassword']"));
-        newPassField.sendKeys("eu.pass2");
-
-        WebElement repeatPassField = driver.findElement(By.xpath("//div[@id='preferences-win']//input[@name='newPasswordRepeat']"));
-        repeatPassField.sendKeys("eu.pass2");
-
-        WebElement saveBtn = driver.findElement(By.cssSelector("#preferences-win button.btn-warning"));
-        saveBtn.click();
-
-        WebElement statusElement = driver.findElement(By.cssSelector("#preferences-win .status-msg"));
-        System.out.println(statusElement.getText());
-        assertThat(statusElement.getText(), is("Your password has been successfully changed."));
+        navbar.openPreferences();
+        changePasswordPage.changePassword("eu.pass", "eu.pass2", "eu.pass2");
+        String statusMessage = changePasswordPage.getStatusMessage();
+        System.out.println(statusMessage);
+        assertThat(statusMessage, is("Your password has been successfully changed."));
 
     }
 
