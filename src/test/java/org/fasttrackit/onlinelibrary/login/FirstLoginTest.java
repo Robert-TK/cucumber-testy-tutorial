@@ -70,19 +70,6 @@ public class FirstLoginTest extends TestBase {
         loginPage.assertThatErrorIs("Please enter your email!");
     }
 
-    @Test
-    public void successChangePassword() {
-        openLoginPage();
-        loginPage.doLogin("eu@fast.com", "eu.pass");
-        navbar.openPreferences();
-        changePasswordPage.changePassword("eu.pass", "eu.pass2", "eu.pass2");
-        String statusMessage = changePasswordPage.getStatusMessage();
-        System.out.println(statusMessage);
-        assertThat(statusMessage, is("Your password has been successfully changed."));
-
-    }
-
-
     private void openLoginPage() {
         System.out.println("Open Login Page.");
         driver.get("https://rawgit.com/sdl/Testy/master/src/test/functional/app-demo/login.html");
