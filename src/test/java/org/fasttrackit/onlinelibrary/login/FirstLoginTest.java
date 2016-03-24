@@ -1,11 +1,8 @@
 package org.fasttrackit.onlinelibrary.login;
 
+import com.sdl.selenium.web.link.WebLink;
 import org.fasttrackit.example.LoginView;
 import org.fasttrackit.util.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class FirstLoginTest extends TestBase {
@@ -17,12 +14,9 @@ public class FirstLoginTest extends TestBase {
         openLoginPage();
         loginPage.doLogin("eu@fast.com", "eu.pass");
 
-        try {
-            WebElement logoutBtn = driver.findElement(By.linkText("Logout"));
-            logoutBtn.click();
-        } catch (NoSuchElementException exception) {
-            Assert.fail("Logout button not found.");
-        }
+        WebLink logoutBtn1 = new WebLink().setText("Logout");
+        logoutBtn1.assertClick();
+
     }
 
     @Test
