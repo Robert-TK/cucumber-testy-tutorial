@@ -32,7 +32,6 @@ public class ChangePasswordTest extends TestBase {
         String statusMessage = changePasswordPage.getStatusMessage();
         System.out.println(statusMessage);
         assertThat(statusMessage, is("Your password has been successfully changed."));
-
     }
 
     private void openLoginPage() {
