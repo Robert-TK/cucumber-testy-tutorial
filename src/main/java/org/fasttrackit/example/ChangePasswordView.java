@@ -7,11 +7,11 @@ import org.openqa.selenium.support.How;
 
 public class ChangePasswordView {
 
-    private WebElement currentPassField = new WebLocator().setElPath("//div[@id='preferences-win']//input[@name='password']");
-    private WebElement newPassField = new WebLocator().setElPath("//input[@name='newPassword']");
-    private WebElement repeatPassField = new WebLocator().setElPath("//div[@id='preferences-win']//input[@name='newPasswordRepeat']");
-    private WebElement saveBtn = new WebLocator().setElCssSelector("#preferences-win button.btn-warning");
-    private WebElement statusElement = new WebLocator().setElCssSelector("#preferences-win .status-msg");
+    private WebLocator currentPassField = new WebLocator().setElPath("//div[@id='preferences-win']//input[@name='password']");
+    private WebLocator newPassField = new WebLocator().setElPath("//input[@name='newPassword']");
+    private WebLocator repeatPassField = new WebLocator().setElPath("//div[@id='preferences-win']//input[@name='newPasswordRepeat']");
+    private WebLocator saveBtn = new WebLocator().setElCssSelector("#preferences-win button.btn-warning");
+    private WebLocator statusElement = new WebLocator().setElCssSelector("#preferences-win .status-msg");
 
     public void changePassword(String oldPass, String newPass, String newPassRepeat) {
         currentPassField.sendKeys(oldPass);
@@ -22,7 +22,7 @@ public class ChangePasswordView {
 
     public String getStatusMessage() {
 
-        return statusElement.getText();
+        return statusElement.getHtmlText();
     }
 
 
