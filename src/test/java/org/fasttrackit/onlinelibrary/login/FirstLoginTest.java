@@ -3,6 +3,7 @@ package org.fasttrackit.onlinelibrary.login;
 import com.sdl.selenium.web.link.WebLink;
 import org.fasttrackit.example.LoginView;
 import org.fasttrackit.util.TestBase;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class FirstLoginTest extends TestBase {
@@ -18,34 +19,23 @@ public class FirstLoginTest extends TestBase {
         logoutBtn1.assertClick();
 
     }
+    @DataProvider
+    public static Object[][] invalidLogin() {
+        return new Object[][]{
+                {"eu.fast.com", "wrong.pass","Invalid user or password!"},
+                {"eu.fast.com", "", "Please enter your password!"},
+                {"", "some.pass", "Please enter your email!"},
+                {"", "", "Please enter your email!"}
 
-    @Test
-    public void errorWhenInvalidPassword() {
-        openLoginPage();
-        loginPage.doLogin("eu.fast.com", "wrong.pass");
-        loginPage.assertThatErrorIs("Invalid user or password!");
+        };
     }
 
-    @Test
-    public void whenEnterOnlyEmailIGetErrorMessage() {
+    @Test(dataProvider = "invalidLogin")
+    public void invalidLoginTest (String email, String pass, String errorMsg){
+        System.out.println("invalid login test:" + email + " - " + pass + " - " + errorMsg);
         openLoginPage();
-        loginPage.doLogin("eu.fast.com", "");
-        loginPage.assertThatErrorIs("Please enter your password!");
-
-    }
-
-    @Test
-    public void whenEnterOnlyPasswordGetErrorMessage() {
-        openLoginPage();
-        loginPage.doLogin("", "eu.pass");
-        loginPage.assertThatErrorIs("Please enter your email!");
-    }
-
-    @Test
-    public void noCredentials() {
-        openLoginPage();
-        loginPage.doLogin("", "");
-        loginPage.assertThatErrorIs("Please enter your email!");
+        loginPage.doLogin(email,pass);
+        loginPage.assertThatErrorIs(errorMsg);
     }
 
     private void openLoginPage() {
