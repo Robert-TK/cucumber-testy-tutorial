@@ -66,4 +66,10 @@ public class LoginSteps extends TestBase {
     public void iShouldSeeTheCorrectResult() throws Throwable {
         Assert.assertThat("The numbers are not equal", x, is(7));
     }
+
+    private org.fasttrackit.example.LoginView loginPage = new org.fasttrackit.example.LoginView();
+    @When("^I login with \"([^\"]*)\"/\"([^\"]*)\" on app$")
+    public void iLoginWith(String email, String pass) throws Throwable {
+        loginPage.doLogin(email, pass);
+    }
 }
