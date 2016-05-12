@@ -3,6 +3,10 @@ package org.fasttrackit.example;
 import com.sdl.selenium.web.WebLocator;
 import com.sdl.selenium.web.button.Button;
 import com.sdl.selenium.web.form.TextField;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -31,4 +35,6 @@ public class LoginView {
         System.out.println(errorMsg.getHtmlText());
         assertThat(errorMsg.getHtmlText(), is(message));
     }
+
+
 }
